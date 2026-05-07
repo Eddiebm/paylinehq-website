@@ -1,14 +1,14 @@
-// FrankGrant — Theme Management
+// PayLineHQ — Theme Management
 (function() {
   // Apply theme immediately to prevent flash
-  var saved = localStorage.getItem('frankgrant-theme');
+  var saved = localStorage.getItem('paylinehq-theme');
   var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   var theme = saved || (systemDark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
 })();
 
 function initTheme() {
-  var saved = localStorage.getItem('frankgrant-theme');
+  var saved = localStorage.getItem('paylinehq-theme');
   var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   var theme = saved || (systemDark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
@@ -19,7 +19,7 @@ function toggleTheme() {
   var current = document.documentElement.getAttribute('data-theme');
   var next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('frankgrant-theme', next);
+  localStorage.setItem('paylinehq-theme', next);
   updateToggleIcon(next);
 }
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Listen for system theme changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-    if (!localStorage.getItem('frankgrant-theme')) {
+    if (!localStorage.getItem('paylinehq-theme')) {
       var theme = e.matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', theme);
       updateToggleIcon(theme);

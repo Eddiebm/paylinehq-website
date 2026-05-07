@@ -1,4 +1,4 @@
-// FrankGrant — Navigation behaviors
+// PayLineHQ — Navigation behaviors
 document.addEventListener('DOMContentLoaded', function() {
   var hamburger = document.getElementById('nav-hamburger');
   var overlay = document.getElementById('nav-overlay');

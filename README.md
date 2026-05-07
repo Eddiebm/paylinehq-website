@@ -1,6 +1,6 @@
-# FrankGrant Marketing Website
+# PayLineHQ Marketing Website
 
-Static HTML/CSS/JS marketing site for FrankGrant — NIH grant writing by experts, peer-reviewed before you submit.
+Static HTML/CSS/JS marketing site for PayLineHQ — NIH grant writing by experts, peer-reviewed before you submit.
 
 ## File Structure
 
@@ -118,8 +118,8 @@ Pricing appears in two places:
 The site is a static HTML website. Deploy with Wrangler Pages:
 
 ```bash
-cd /path/to/frankgrant
-npx wrangler pages deploy website --project-name frankgrant-marketing --commit-dirty=true
+cd /path/to/paylinehq
+npx wrangler pages deploy website --project-name paylinehq-marketing --commit-dirty=true
 ```
 
 Or deploy to any static hosting service (Vercel, Netlify, GitHub Pages):
@@ -146,7 +146,7 @@ npx netlify deploy --dir website --prod
 
 The client intake form in `hire.html` POSTs to:
 ```
-https://frankgrant-worker.eddie-781pagesdev.workers.dev/api/intake/direct
+https://paylinehq-worker.eddie-781pagesdev.workers.dev/api/intake/direct
 ```
 
 Update the fetch URL in the inline `<script>` at the bottom of `hire.html` if the worker endpoint changes.

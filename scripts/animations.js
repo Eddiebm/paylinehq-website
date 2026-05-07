@@ -1,4 +1,4 @@
-// FrankGrant — Scroll animations and interactive behaviors
+// PayLineHQ — Scroll animations and interactive behaviors
 document.addEventListener('DOMContentLoaded', function() {
 
   // ── Scroll animations ──────────────────────────────────────────────

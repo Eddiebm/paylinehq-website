@@ -1,4 +1,4 @@
-// FrankGrant — ROI Calculator
+// PayLineHQ — ROI Calculator
 document.addEventListener('DOMContentLoaded', function() {
   var awardInput = document.getElementById('calc-award');
   var mechanismSelect = document.getElementById('calc-mechanism');
