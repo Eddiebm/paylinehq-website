@@ -1,66 +1,33 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Target } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { LinkButton } from "@/components/link-button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { StudySectionDemo } from "@/components/study-section-demo";
 import { LiveTicker } from "@/components/live-ticker";
 import { Reveal } from "@/components/reveal";
-import { StudySectionDemo } from "@/components/study-section-demo";
 
 const APP_URL = "https://frankgrant.pages.dev";
 
 const FAQS = [
   {
-    q: "Is this a service or a tool?",
-    a: "Both. PayLineHQ Self-Serve is the SaaS — you write your grant in our app, get the same Study Section simulation and citation verification, and ship it yourself. Done-For-You is the service tier — we draft the application, run it through peer review, and deliver a submission-ready package. Same brain, two paths.",
+    q: "Service or tool?",
+    a: "Both. Self-Serve is the SaaS — you write your grant in the app and get the same Study Section simulation. Submit-Ready is the service tier — we draft the entire application, run it through peer review, and deliver a submission-ready package.",
   },
   {
-    q: "What if my science isn't strong enough yet?",
-    a: "PayLineHQ won't write a fundable grant out of weak science — no tool can. But it will tell you exactly which weaknesses real reviewers will flag, before you submit. Use it as a diagnostic. Many users iterate on Specific Aims before committing to a full submission.",
+    q: "What if my science is weak?",
+    a: "PayLineHQ won't write a fundable grant out of weak science — no tool can. But it will tell you exactly which weaknesses real reviewers will flag, before you submit. Use it as a diagnostic.",
   },
   {
-    q: "Do I need grant-writing experience to use the SaaS tier?",
-    a: "No. The SaaS guides you through every section with NIH-specific structure, reviewer psychology hints, and a built-in compliance check. Most first-time users finish a Phase I draft in a weekend. The Study Section simulation runs continuously as you write.",
+    q: "Do I own the work?",
+    a: "Completely. We're a writing and review service, not a co-author. Your IP, your science, your grant. We make no claim on funded research.",
   },
   {
-    q: "Who owns the application — me or PayLineHQ?",
-    a: "You. 100%. We're a writing and review service, not a co-author. Your science, your data, your IP — your grant. We make no claim on funded research.",
+    q: "How is this different from hiring a consultant?",
+    a: "Consultants charge $5–15K, take 4–8 weeks, and don't simulate peer review. Submit-Ready is $2,500 + 3% if funded, takes 5–7 business days, includes three reviewer simulations.",
   },
   {
-    q: "How is this different from hiring a grant consultant?",
-    a: "Consultants charge $5k–$15k, take 4–8 weeks, and don't simulate peer review. PayLineHQ Done-For-You is $2,500 upfront + 3% if funded, takes 5–7 business days, and includes three independent reviewer simulations. Success-aligned pricing. Faster turnaround. Built-in QA.",
+    q: "Does the simulation actually predict outcomes?",
+    a: "It catches the same weaknesses real reviewers consistently flag. No simulation guarantees an award, but applications scoring competitively in our simulation perform better in real review.",
   },
-  {
-    q: "Can the simulation actually predict outcomes?",
-    a: "It's built on 25 years of reviewer psychology, NIH scoring rubrics, and analysis of funded grants across multiple institutes. It catches the same weaknesses real reviewers consistently flag — vague innovation, underpowered designs, missing alternative strategies, citation issues. No simulation guarantees an award, but applications that score competitively in our sim consistently perform better in real review.",
-  },
-];
-
-const COMPARISON_ROWS: Array<{
-  feature: string;
-  consultant: string;
-  ai: string;
-  paylinehq: string;
-  payHighlight?: boolean;
-}> = [
-  { feature: "Cost", consultant: "$5k–$15k", ai: "$20–50/mo", paylinehq: "$2,500 + 3% if funded" },
-  { feature: "Timeline", consultant: "4–8 weeks", ai: "Instant (unreviewed)", paylinehq: "5–7 business days" },
-  { feature: "NIH expertise", consultant: "Varies", ai: "Generic", paylinehq: "25 years · $7M+ awarded" },
-  { feature: "Peer review simulation", consultant: "✗ Not offered", ai: "✗ Not offered", paylinehq: "✓ Always included", payHighlight: true },
-  { feature: "Citation verification", consultant: "Manual", ai: "✗ Hallucinations", paylinehq: "✓ 5 databases verified", payHighlight: true },
-  { feature: "FOA-specific compliance", consultant: "Manual", ai: "✗ None", paylinehq: "✓ Automated" },
-  { feature: "Quality certification", consultant: "✗ None", ai: "✗ None", paylinehq: "✓ Three-pass mandatory", payHighlight: true },
-  { feature: "You own the IP", consultant: "✓", ai: "Unclear", paylinehq: "✓ Always" },
-  { feature: "Success-aligned pricing", consultant: "✗ Full fee", ai: "✗ Subscription", paylinehq: "✓ 3% if funded", payHighlight: true },
 ];
 
 export default function Home() {
@@ -68,381 +35,521 @@ export default function Home() {
     <>
       <SiteNav />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border/40">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(60rem 40rem at 50% -10%, rgba(13,148,136,0.18), transparent 60%), radial-gradient(40rem 30rem at 90% 20%, rgba(13,148,136,0.10), transparent 60%)",
-          }}
-        />
-        <div className="container mx-auto max-w-6xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-          <Reveal className="flex flex-col items-center text-center">
-            <Badge
-              variant="outline"
-              className="mb-6 gap-2 border-teal-500/40 bg-teal-500/10 px-3 py-1 text-teal-300"
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              Trusted by NIH-funded researchers · 25 years · $7M+ awarded
-            </Badge>
-
-            <h1 className="text-balance text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl">
-              Stop your NIH grant from{" "}
-              <span className="text-teal-400">getting triaged.</span>
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              PayLineHQ runs your application through a simulated Study Section{" "}
-              <em>before</em> NIH does. Three reviewer perspectives, three-pass quality review,
-              citation verification, and a competitive impact score — so you fix what real reviewers
-              would have flagged, before they count.
-            </p>
-
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <LinkButton href={APP_URL} target="_blank" rel="noopener" size="lg"   className="bg-teal-500 text-white hover:bg-teal-400">
-                  Try PayLineHQ free <ArrowRight className="ml-1.5 h-4 w-4" />
-                </LinkButton>
-              <LinkButton href="/hire" size="lg" variant="outline"   className="border-foreground/20 text-foreground/90">
-                  Hire us — $2,500 + 3% if funded
-                </LinkButton>
+      <main className="relative z-[2]">
+        {/* ── COVER / HERO ──────────────────────────────────────────── */}
+        <section className="border-b border-[var(--ink-rule)]">
+          <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+            {/* Issue line */}
+            <div className="flex items-baseline justify-between border-b border-[var(--ink-rule)] py-3">
+              <span className="smallcaps">Vol. 01 · Issue 01</span>
+              <span className="smallcaps text-[var(--ink-faint)]">
+                Peer Review Engine, North America Edition
+              </span>
             </div>
 
-            <p className="mt-4 text-sm text-muted-foreground/80">
-              No credit card · No commitment · 30 sec to first reviewer score
-            </p>
-          </Reveal>
+            {/* The cover */}
+            <div className="grid grid-cols-12 gap-6 lg:gap-12 py-14 lg:py-24">
+              <div className="col-span-12 lg:col-span-9">
+                <p className="smallcaps text-[var(--oxblood)] mb-7">
+                  ⌜ The Cover Story ⌝
+                </p>
+                <h1 className="font-display text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.95] tracking-[-0.035em] mb-9 text-balance">
+                  Stop your NIH grant
+                  <br />
+                  from <em className="italic font-normal text-[var(--oxblood)]">getting triaged.</em>
+                </h1>
+                <div className="grid grid-cols-12 gap-6 lg:gap-12">
+                  <p className="dropcap col-span-12 md:col-span-7 text-[1.18rem] leading-[1.62] text-[var(--ink)] text-pretty">
+                    Most NIH grants are not triaged for the science. They are triaged for the
+                    <em> framing</em>: vague innovation claims, underpowered statistics, citations
+                    that almost — but do not quite — support the claim. Reviewers see what the PI
+                    cannot. PayLineHQ runs your application through three independent reviewer
+                    simulations <em>before</em> NIH does, so you fix what they would have flagged,
+                    before they count.
+                  </p>
+                  <aside className="col-span-12 md:col-span-5 md:pl-8 md:border-l md:border-[var(--ink-rule)]">
+                    <p className="smallcaps mb-3 text-[var(--ink-faint)]">In this issue</p>
+                    <ol className="font-mono text-[0.78rem] space-y-1.5">
+                      {[
+                        ["§01", "The premise"],
+                        ["§02", "The mechanism"],
+                        ["§03", "Live simulation"],
+                        ["§04", "How we compare"],
+                        ["§05", "A note from the founder"],
+                        ["§06", "Subscriptions"],
+                        ["§07", "Common questions"],
+                      ].map(([n, t]) => (
+                        <li key={n} className="flex items-baseline gap-3">
+                          <span className="text-[var(--ink-faint)] tabular-nums">{n}</span>
+                          <span className="text-[var(--ink-muted)]">{t}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </aside>
+                </div>
 
-          {/* Trust strip */}
-          <Reveal delay={0.1} className="mt-16">
-            <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-3">
-              <Card className="border-border/40 bg-card/60 backdrop-blur">
-                <CardContent className="p-5">
-                  <div className="flex items-center justify-center gap-2 text-2xl font-bold text-teal-400">
-                    <ShieldCheck className="h-5 w-5" />
-                    $7M+
+                {/* CTA strip */}
+                <div className="mt-12 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6 pt-8 border-t border-[var(--ink-rule)]">
+                  <Link
+                    href={APP_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="group inline-flex items-baseline gap-2 bg-[var(--ink)] px-7 py-3 text-[var(--paper)] font-mono text-[0.78rem] uppercase tracking-[0.15em] hover:bg-[var(--oxblood)] transition-colors"
+                  >
+                    Open the app
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                  <Link
+                    href="/hire"
+                    className="font-mono text-[0.78rem] uppercase tracking-[0.15em] text-[var(--ink)] editorial-link"
+                  >
+                    Or commission a writer ↗
+                  </Link>
+                  <span className="ml-auto smallcaps text-[var(--ink-faint)] hidden md:inline">
+                    No card · 30-sec to first reviewer score
+                  </span>
+                </div>
+              </div>
+
+              {/* Right rail — credibility figures, set as marginalia */}
+              <aside className="col-span-12 lg:col-span-3 lg:border-l lg:border-[var(--ink-rule)] lg:pl-8 flex flex-col gap-9 lg:pt-12">
+                {[
+                  { figure: "$7.2M+", label: "in NIH awards across the team's career" },
+                  { figure: "25 yrs", label: "of NIH peer-review psychology codified" },
+                  { figure: "5–7", label: "business days for Submit-Ready Phase I" },
+                  { figure: "3 / 3", label: "reviewer simulations on every grant" },
+                ].map((m) => (
+                  <div key={m.figure}>
+                    <p className="font-display text-[2.4rem] leading-none tabular-nums">
+                      {m.figure}
+                    </p>
+                    <p className="marginalia mt-2">{m.label}</p>
                   </div>
-                  <p className="mt-1 text-xs text-muted-foreground">in NIH awards</p>
-                </CardContent>
-              </Card>
-              <Card className="border-border/40 bg-card/60 backdrop-blur">
-                <CardContent className="p-5">
-                  <div className="flex items-center justify-center gap-2 text-2xl font-bold text-teal-400">
-                    <Target className="h-5 w-5" />
-                    3
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground">independent reviewer sims</p>
-                </CardContent>
-              </Card>
-              <Card className="col-span-2 border-border/40 bg-card/60 backdrop-blur sm:col-span-1">
-                <CardContent className="p-5">
-                  <div className="flex items-center justify-center gap-2 text-2xl font-bold text-teal-400">
-                    <CheckCircle2 className="h-5 w-5" />
-                    5–7 days
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground">to submission-ready</p>
-                </CardContent>
-              </Card>
+                ))}
+              </aside>
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* LIVE TICKER */}
-      <LiveTicker />
-
-      {/* HOW IT WORKS */}
-      <section id="how-it-works" className="border-b border-border/40 py-24">
-        <div className="container mx-auto max-w-6xl px-6">
-          <Reveal className="mb-12 text-center">
-            <Badge variant="outline" className="mb-4 border-teal-500/40 bg-teal-500/10 text-teal-300">
-              The Process
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              From draft to submission-ready in 5–7 days
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              You stay the principal investigator. We bring the structure, reviewer psychology, and the QA your draft needs.
-            </p>
-          </Reveal>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                n: 1,
-                title: "Describe your science",
-                desc: "Plain language. We extract aims, mechanism, target institute, and commercialization angle. You provide the science — we add the structure.",
-              },
-              {
-                n: 2,
-                title: "We write & simulate review",
-                desc: "Every section drafted to NIH conventions. Three independent reviewer personas score it before delivery. Weak spots come back to you with the receipts.",
-              },
-              {
-                n: 3,
-                title: "Certified & delivered",
-                desc: "Three-pass quality review: science, NIH compliance, simulated impact score. If the score isn't competitive, we rewrite. You get a submission-ready package.",
-              },
-            ].map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.08}>
-                <Card className="h-full border-border/40 bg-card/60">
-                  <CardContent className="p-6">
-                    <div className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-500/15 text-sm font-bold text-teal-400">
-                      {s.n}
-                    </div>
-                    <h3 className="text-lg font-semibold">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* STUDY SECTION DEMO */}
-      <StudySectionDemo />
+        {/* ── TICKER ───────────────────────────────────────────────── */}
+        <LiveTicker />
 
-      {/* COMPARISON */}
-      <section className="border-b border-border/40 bg-muted/30 py-24">
-        <div className="container mx-auto max-w-6xl px-6">
-          <Reveal className="mb-10 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">How we compare</h2>
-            <p className="mt-3 text-muted-foreground">
-              Across every dimension biotech founders actually care about.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Card className="overflow-hidden border-border/40 bg-card/60">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
+        {/* ── §01 The premise ─────────────────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§01</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    The premise
+                  </h2>
+                </div>
+                <div className="col-span-12 md:col-span-9 md:col-start-5">
+                  <p className="text-[1.32rem] leading-[1.55] tracking-[-0.005em] text-[var(--ink)] max-w-3xl text-pretty">
+                    A triaged grant is a 9-month silence followed by a summary statement that
+                    describes weaknesses you could have caught in a week. The fix is not better
+                    science — most triaged science is good. The fix is{" "}
+                    <em>seeing your application the way a reviewer sees it</em>{" "}
+                    before the panel convenes.
+                  </p>
+                  <p className="text-[1.05rem] leading-[1.7] mt-7 max-w-2xl text-[var(--ink-muted)]">
+                    PayLineHQ is a peer-review engine built on 25 years of reviewer psychology
+                    and the patterns that distinguish funded grants from triaged ones. It is not
+                    a writing assistant. It is the second pair of eyes you do not have on your
+                    own draft.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ── §02 The mechanism ───────────────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28 bg-[var(--paper-warm)]/40">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12 mb-12">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§02</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    The mechanism
+                  </h2>
+                </div>
+                <p className="col-span-12 md:col-span-9 md:col-start-5 marginalia max-w-xl">
+                  From plain-language draft to certified submission package in five to seven
+                  business days. The PI provides the science; PayLineHQ provides the structure,
+                  the reviewer simulation, and the certification.
+                </p>
+              </div>
+
+              <ol className="grid grid-cols-1 lg:grid-cols-3 border-t border-[var(--ink)]">
+                {[
+                  {
+                    n: "01",
+                    title: "Describe your science",
+                    body: "Plain language. We extract aims, mechanism, target institute, and commercialization angle. You stay the principal investigator.",
+                  },
+                  {
+                    n: "02",
+                    title: "We write & simulate review",
+                    body: "Every section drafted to NIH conventions. Three independent reviewer personas score it before delivery. Weak spots come back with the receipts.",
+                  },
+                  {
+                    n: "03",
+                    title: "Certified & delivered",
+                    body: "Three-pass quality review: science, NIH compliance, simulated impact score. If the score isn't competitive, we rewrite. You get a submission-ready package.",
+                  },
+                ].map((s) => (
+                  <li
+                    key={s.n}
+                    className="border-b border-[var(--ink-rule)] lg:border-b-0 lg:border-r last:lg:border-r-0 px-2 py-9 lg:px-8"
+                  >
+                    <p className="font-mono text-[2.6rem] leading-none tabular-nums text-[var(--oxblood)] mb-7">
+                      {s.n}
+                    </p>
+                    <h3 className="font-display text-[1.35rem] leading-[1.2] tracking-[-0.015em] mb-3">
+                      {s.title}
+                    </h3>
+                    <p className="text-[0.98rem] leading-[1.6] text-[var(--ink-muted)] max-w-xs">
+                      {s.body}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ── §03 Live simulation ─────────────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12 mb-12">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§03</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    Live simulation
+                  </h2>
+                </div>
+                <p className="col-span-12 md:col-span-9 md:col-start-5 marginalia max-w-xl">
+                  An actual summary statement, generated for an SBIR Phase I application to NCI.
+                  Three reviewers, each with a different vantage. Concerns surfaced before the
+                  panel meets.
+                </p>
+              </div>
+              <StudySectionDemo />
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ── §04 Comparison ──────────────────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28 bg-[var(--paper-warm)]/40">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12 mb-10">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§04</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    How we compare
+                  </h2>
+                </div>
+                <p className="col-span-12 md:col-span-9 md:col-start-5 marginalia max-w-xl">
+                  Across every dimension a biotech founder actually evaluates when deciding
+                  whether to write the grant herself, hire a consultant, or pay for AI.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto -mx-6 lg:mx-0">
+                <table className="min-w-full border-y-2 border-[var(--ink)]">
                   <thead>
-                    <tr className="border-b border-border/40 bg-muted/40">
-                      <th className="px-4 py-3 font-semibold">Feature</th>
-                      <th className="px-4 py-3 font-semibold">Human consultant</th>
-                      <th className="px-4 py-3 font-semibold">Generic AI</th>
-                      <th className="px-4 py-3 font-semibold text-teal-300">PayLineHQ</th>
+                    <tr className="text-left">
+                      <th className="px-6 lg:px-3 py-4 smallcaps text-[var(--ink-faint)] font-medium">
+                        Dimension
+                      </th>
+                      <th className="px-6 lg:px-3 py-4 smallcaps text-[var(--ink-faint)] font-medium">
+                        Human consultant
+                      </th>
+                      <th className="px-6 lg:px-3 py-4 smallcaps text-[var(--ink-faint)] font-medium">
+                        Generic AI
+                      </th>
+                      <th className="px-6 lg:px-3 py-4 smallcaps text-[var(--oxblood)] font-medium">
+                        PayLineHQ
+                      </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {COMPARISON_ROWS.map((r, i) => (
-                      <tr
-                        key={r.feature}
-                        className={`border-b border-border/20 ${i % 2 ? "bg-muted/10" : ""}`}
-                      >
-                        <td className="px-4 py-3 font-medium">{r.feature}</td>
-                        <td className="px-4 py-3 text-muted-foreground">{r.consultant}</td>
-                        <td className="px-4 py-3 text-muted-foreground">{r.ai}</td>
-                        <td
-                          className={`px-4 py-3 font-medium ${
-                            r.payHighlight ? "bg-teal-500/10 text-teal-200" : "text-foreground"
-                          }`}
-                        >
-                          {r.paylinehq}
+                  <tbody className="font-mono text-[0.85rem]">
+                    {COMPARISON_ROWS.map((r) => (
+                      <tr key={r.f} className="border-t border-[var(--ink-rule)] align-top">
+                        <td className="px-6 lg:px-3 py-5 text-[var(--ink)] font-medium">
+                          {r.f}
+                        </td>
+                        <td className="px-6 lg:px-3 py-5 text-[var(--ink-muted)]">{r.c}</td>
+                        <td className="px-6 lg:px-3 py-5 text-[var(--ink-muted)]">{r.a}</td>
+                        <td className="px-6 lg:px-3 py-5 text-[var(--ink)]">
+                          {r.h && <span className="text-[var(--oxblood)]">★ </span>}
+                          {r.p}
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </Card>
-          </Reveal>
-        </div>
-      </section>
+              <p className="marginalia mt-4">
+                ★ Capabilities unique to PayLineHQ at the time of this issue.
+              </p>
+            </div>
+          </section>
+        </Reveal>
 
-      {/* FOUNDER STORY (replaces fake testimonials) */}
-      <section className="border-b border-border/40 py-24">
-        <div className="container mx-auto max-w-3xl px-6">
-          <Reveal className="text-center">
-            <Badge variant="outline" className="mb-4 border-teal-500/40 bg-teal-500/10 text-teal-300">
-              Founder POV
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why I built PayLineHQ</h2>
-          </Reveal>
-          <Reveal delay={0.1} className="mt-10 space-y-5 text-lg leading-relaxed text-muted-foreground">
-            <p>
-              I'm Eddie Bannerman-Menson, founder of <span className="text-foreground">COARE Holdings</span>.
-              We're developing DCLK1-targeted CAR-T cell therapy for ovarian cancer. Like every biotech
-              founder, my path to the clinic runs through non-dilutive funding — primarily NIH SBIR/STTR.
-            </p>
-            <p>
-              I spent years writing applications, waiting 9 months, watching them get triaged for fixable
-              reasons — vague innovation framing, underpowered statistics, citations that didn't quite
-              support the claim. Reviewers caught what I couldn't see. There was no way to{" "}
-              <em>simulate</em> their perspective before submission.
-            </p>
-            <p>
-              PayLineHQ is what I wished existed. It runs your application through three independent
-              reviewer simulations using 25 years of NIH peer-review psychology, scores it against
-              real funding lines, and tells you exactly what to fix before NIH does. The same engine
-              that's now writing my COARE submissions.
-            </p>
-            <p className="text-foreground">
-              If it works for me, it works for you.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* PRICING PREVIEW */}
-      <section id="pricing" className="border-b border-border/40 bg-muted/30 py-24">
-        <div className="container mx-auto max-w-6xl px-6">
-          <Reveal className="mb-12 text-center">
-            <Badge variant="outline" className="mb-4 border-teal-500/40 bg-teal-500/10 text-teal-300">
-              Pricing
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Pick the path that fits your timeline
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              Self-Serve for hands-on PIs. Submit-Ready when you'd rather we drive.
-            </p>
-          </Reveal>
-
-          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
-            {/* Self-Serve */}
-            <Reveal delay={0.05}>
-              <Card className="h-full border-border/40 bg-card/60">
-                <CardContent className="p-7">
-                  <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    For hands-on PIs
-                  </div>
-                  <h3 className="text-2xl font-bold">Self-Serve</h3>
-                  <div className="mt-3 flex items-baseline gap-2">
-                    <span className="text-4xl font-extrabold tracking-tight">$149</span>
-                    <span className="text-sm text-muted-foreground">/month</span>
-                  </div>
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    You write. The app simulates peer review, verifies citations, and runs FOA-specific
-                    compliance checks every time you save.
+        {/* ── §05 Founder note ────────────────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12 mb-10">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§05</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    A note from the founder
+                  </h2>
+                </div>
+                <div className="col-span-12 md:col-span-9 md:col-start-5">
+                  <p className="smallcaps text-[var(--ink-faint)] mb-2">By Eddie Bannerman-Menson</p>
+                  <p className="marginalia mb-8">
+                    Founder, COARE Holdings · DCLK1-targeted CAR-T for ovarian cancer
                   </p>
-                  <ul className="mt-6 space-y-2.5 text-sm">
+                  <article className="prose-editorial space-y-6 max-w-2xl">
+                    <p className="dropcap text-[1.18rem] leading-[1.7] text-[var(--ink)]">
+                      I have been writing NIH grants for a decade. My company is developing a
+                      DCLK1-targeted CAR-T cell therapy for platinum-resistant ovarian cancer,
+                      and the path to the clinic runs through non-dilutive funding —
+                      primarily SBIR and STTR.
+                    </p>
+                    <p className="text-[1.05rem] leading-[1.7] text-[var(--ink)]">
+                      For years I watched applications come back triaged for fixable reasons.
+                      Vague innovation framing. Underpowered statistics. A citation that did
+                      not quite support the claim it was attached to. Reviewers caught what I
+                      could not see, and there was no way to{" "}
+                      <em>simulate</em> their perspective before submission.
+                    </p>
+                    <p className="text-[1.05rem] leading-[1.7] text-[var(--ink)]">
+                      PayLineHQ is the tool I wished existed. It runs your application
+                      through three independent reviewer simulations using 25 years of NIH
+                      peer-review psychology, scores it against funded comparators, and tells
+                      you exactly what to fix before NIH does. The same engine now reviews
+                      every COARE submission.
+                    </p>
+                    <p className="text-[1.05rem] leading-[1.7] text-[var(--ink)] italic">
+                      If it works for me, it works for you.
+                    </p>
+                    <div className="mt-10 flex items-center gap-4 pt-6 border-t border-[var(--ink-rule)]">
+                      <span className="font-display text-[1.5rem] italic">— Eddie</span>
+                      <span className="smallcaps text-[var(--ink-faint)]">
+                        Eddie@bannermanmenson.com
+                      </span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ── §06 Subscriptions / Pricing ─────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28 bg-[var(--paper-warm)]/40">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12 mb-12">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§06</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    Subscriptions
+                  </h2>
+                </div>
+                <p className="col-span-12 md:col-span-9 md:col-start-5 marginalia max-w-xl">
+                  Two paths into the engine. Pick the one that matches your timeline. Both run
+                  the same simulation against the same reviewer panel.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[var(--ink)] border-y-2 border-[var(--ink)]">
+                {/* Self-Serve */}
+                <div className="bg-[var(--paper)] p-8 lg:p-12">
+                  <p className="smallcaps text-[var(--ink-faint)]">Self-Serve · For hands-on PIs</p>
+                  <h3 className="font-display text-[2.25rem] leading-[1.05] mt-3 mb-7 tracking-[-0.025em]">
+                    You write. The engine reviews.
+                  </h3>
+                  <p className="font-display text-[3.5rem] leading-none tabular-nums">
+                    $149<span className="text-[1.2rem] text-[var(--ink-faint)] font-normal">/month</span>
+                  </p>
+                  <p className="marginalia mt-2 mb-8">14-day free trial · cancel anytime</p>
+
+                  <ul className="space-y-3 text-[0.98rem] leading-[1.55]">
                     {[
-                      "Study Section simulation engine",
-                      "Three-pass quality review on demand",
+                      "Study Section simulation engine, on demand",
+                      "Three-pass quality review at every save",
                       "FOA-specific compliance checking",
-                      "Citation verification across 5 databases",
+                      "Citation verification across five databases",
                       "All NIH mechanisms supported",
-                      "DOCX export · unlimited revisions",
+                      "Unlimited revisions · DOCX export",
                     ].map((f) => (
-                      <li key={f} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" />
+                      <li key={f} className="flex items-baseline gap-3">
+                        <span className="font-mono text-[var(--oxblood)] text-[0.7rem] mt-1">▮</span>
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
-                  <LinkButton href={APP_URL} target="_blank" rel="noopener" variant="outline" className="mt-7 w-full border-teal-500/40 text-teal-300 hover:bg-teal-500/10">
-                      Try free for 14 days <ArrowRight className="ml-1.5 h-4 w-4" />
-                    </LinkButton>
-                </CardContent>
-              </Card>
-            </Reveal>
-
-            {/* Submit-Ready (DFY) */}
-            <Reveal delay={0.1}>
-              <Card className="relative h-full border-teal-500/50 bg-card/80 ring-1 ring-teal-500/40">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-teal-500 text-white">Most Popular</Badge>
+                  <Link
+                    href={APP_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="mt-9 inline-flex items-baseline gap-2 font-mono text-[0.78rem] uppercase tracking-[0.15em] text-[var(--ink)] editorial-link"
+                  >
+                    Begin trial → 14-day, no card
+                  </Link>
                 </div>
-                <CardContent className="p-7">
-                  <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-teal-300">
-                    When you'd rather we drive
+
+                {/* Submit-Ready */}
+                <div className="bg-[var(--ink)] text-[var(--paper)] p-8 lg:p-12 relative">
+                  <div className="absolute top-4 right-4 lg:top-6 lg:right-6 smallcaps text-[var(--paper)] border border-[var(--paper)] px-2 py-1">
+                    Most chosen
                   </div>
-                  <h3 className="text-2xl font-bold">Submit-Ready</h3>
-                  <div className="mt-3 flex items-baseline gap-2">
-                    <span className="text-4xl font-extrabold tracking-tight">$2,500</span>
-                    <span className="text-sm text-muted-foreground">upfront</span>
-                  </div>
-                  <p className="mt-2 text-xs font-semibold text-amber-300">+ 3% success fee if funded</p>
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    We draft the entire application, run three peer-review simulations, certify it, and
-                    deliver a submission-ready package. 5–7 business days.
+                  <p className="smallcaps text-[#d4cdb8]">Submit-Ready · Done by us</p>
+                  <h3 className="font-display text-[2.25rem] leading-[1.05] mt-3 mb-7 tracking-[-0.025em] text-[var(--paper)]">
+                    We write. You submit.
+                  </h3>
+                  <p className="font-display text-[3.5rem] leading-none tabular-nums">
+                    $2,500<span className="text-[1.2rem] text-[#d4cdb8] font-normal"> upfront</span>
                   </p>
-                  <ul className="mt-6 space-y-2.5 text-sm">
+                  <p className="marginalia mt-2 mb-8" style={{ color: "#b8821f" }}>
+                    + 3% success fee, paid only if funded
+                  </p>
+
+                  <ul className="space-y-3 text-[0.98rem] leading-[1.55]">
                     {[
-                      "Complete NIH application — every section",
+                      "Complete NIH application — every section drafted",
                       "Commercialization Potential narrative",
                       "Three-pass quality certification",
                       "Study Section simulation with impact score",
-                      "Citation verification (5 databases)",
+                      "Citation verification across five databases",
                       "FOA-specific NIH compliance check",
                       "DOCX + PDF submission package",
                       "90-day post-delivery revision support",
                     ].map((f) => (
-                      <li key={f} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" />
+                      <li key={f} className="flex items-baseline gap-3">
+                        <span className="font-mono text-[#b8821f] text-[0.7rem] mt-1">▮</span>
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
-                  <LinkButton href="/hire" className="mt-7 w-full bg-teal-500 text-white hover:bg-teal-400">
-                      Book a consult <ArrowRight className="ml-1.5 h-4 w-4" />
-                    </LinkButton>
-                </CardContent>
-              </Card>
-            </Reveal>
-          </div>
+                  <Link
+                    href="/hire"
+                    className="mt-9 inline-flex items-baseline gap-2 font-mono text-[0.78rem] uppercase tracking-[0.15em] bg-[var(--paper)] text-[var(--ink)] px-7 py-3 hover:bg-[#b8821f] hover:text-[var(--paper)] transition-colors"
+                  >
+                    Commission a writer →
+                  </Link>
+                </div>
+              </div>
 
-          <p className="mt-8 text-center text-sm text-muted-foreground">
-            Phase II / Fast Track from $4,500 · R01/R21 from $3,500 ·{" "}
-            <Link href="/pricing" className="text-teal-300 underline-offset-4 hover:underline">
-              Full pricing
-            </Link>
-          </p>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="border-b border-border/40 py-24">
-        <div className="container mx-auto max-w-3xl px-6">
-          <Reveal className="mb-10 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Common questions</h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Accordion className="w-full">
-              {FAQS.map((f, i) => (
-                <AccordionItem key={i} value={`q${i}`} className="border-border/40">
-                  <AccordionTrigger className="text-left text-base font-medium hover:no-underline">
-                    {f.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="relative overflow-hidden py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(50rem 30rem at 50% 50%, rgba(13,148,136,0.20), transparent 60%)",
-          }}
-        />
-        <div className="container mx-auto max-w-3xl px-6 text-center">
-          <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
-              Your science deserves to be reviewed{" "}
-              <span className="text-teal-400">before</span> NIH does.
-            </h2>
-            <p className="mt-5 text-lg text-muted-foreground">
-              Start free in the app, or book a call and we'll write the whole thing.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <LinkButton href={APP_URL} target="_blank" rel="noopener" size="lg"   className="bg-teal-500 text-white hover:bg-teal-400">
-                  Try PayLineHQ free <ArrowRight className="ml-1.5 h-4 w-4" />
-                </LinkButton>
-              <LinkButton href="/hire" size="lg" variant="outline"   className="border-foreground/20 text-foreground/90">Book a consult</LinkButton>
+              <p className="marginalia mt-6">
+                Phase II / Fast Track from $4,500 · R01 / R21 from $3,500 ·{" "}
+                <Link href="/pricing" className="editorial-link">
+                  Full pricing schedule
+                </Link>
+              </p>
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </section>
+        </Reveal>
+
+        {/* ── §07 FAQ ─────────────────────────────────────────────── */}
+        <Reveal>
+          <section className="border-b border-[var(--ink-rule)] py-20 lg:py-28">
+            <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+              <div className="grid grid-cols-12 gap-6 lg:gap-12">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="section-number">§07</p>
+                  <h2 className="font-display text-[1.95rem] leading-[1.05] mt-3 tracking-[-0.02em]">
+                    Common questions
+                  </h2>
+                </div>
+                <dl className="col-span-12 md:col-span-9 md:col-start-5 max-w-3xl">
+                  {FAQS.map((f, i) => (
+                    <div
+                      key={i}
+                      className={`grid grid-cols-12 gap-4 py-7 ${
+                        i === 0 ? "border-y-2 border-[var(--ink)]" : "border-b border-[var(--ink-rule)]"
+                      }`}
+                    >
+                      <dt className="col-span-12 md:col-span-4">
+                        <span className="font-mono text-[0.72rem] text-[var(--ink-faint)] mr-2">
+                          Q.{String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="font-display text-[1.15rem] leading-[1.25] tracking-[-0.01em]">
+                          {f.q}
+                        </span>
+                      </dt>
+                      <dd className="col-span-12 md:col-span-8 text-[0.98rem] leading-[1.6] text-[var(--ink-muted)]">
+                        {f.a}
+                      </dd>
+                    </div>
+                  ))}
+                  <p className="mt-8 marginalia">
+                    More at{" "}
+                    <Link href="/faq" className="editorial-link">
+                      the full FAQ →
+                    </Link>
+                  </p>
+                </dl>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ── COLOPHON / Final CTA ────────────────────────────────── */}
+        <section className="py-24 lg:py-36">
+          <div className="mx-auto max-w-[1280px] px-6 lg:px-12 text-center">
+            <p className="smallcaps text-[var(--oxblood)] mb-7">⌜ Closing remarks ⌝</p>
+            <h2 className="font-display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.0] tracking-[-0.03em] max-w-4xl mx-auto text-balance">
+              Your science deserves to be reviewed{" "}
+              <em className="text-[var(--oxblood)]">before</em> NIH does.
+            </h2>
+            <p className="text-[1.1rem] leading-[1.55] text-[var(--ink-muted)] mt-7 max-w-xl mx-auto">
+              Begin a free trial in the app, or commission a Submit-Ready engagement.
+              Either path opens with the same simulation.
+            </p>
+            <div className="mt-12 flex flex-col gap-5 sm:flex-row sm:justify-center sm:items-center">
+              <Link
+                href={APP_URL}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-baseline gap-2 bg-[var(--ink)] text-[var(--paper)] px-9 py-4 font-mono text-[0.78rem] uppercase tracking-[0.15em] hover:bg-[var(--oxblood)] transition-colors"
+              >
+                Open the app →
+              </Link>
+              <Link
+                href="/hire"
+                className="font-mono text-[0.78rem] uppercase tracking-[0.15em] editorial-link"
+              >
+                Commission a writer ↗
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <SiteFooter />
     </>
   );
 }
+
+const COMPARISON_ROWS = [
+  { f: "Cost", c: "$5K – $15K", a: "$20 – $50/mo", p: "$2,500 + 3% if funded", h: false },
+  { f: "Timeline", c: "4–8 weeks", a: "Instant (unreviewed)", p: "5–7 business days", h: false },
+  { f: "NIH expertise", c: "Varies", a: "Generic", p: "25 yrs · $7M+ awarded", h: true },
+  { f: "Peer review simulation", c: "—", a: "—", p: "Three reviewers, every grant", h: true },
+  { f: "Citation verification", c: "Manual", a: "Hallucinations", p: "Five databases", h: true },
+  { f: "FOA-specific compliance", c: "Manual", a: "—", p: "Automated", h: false },
+  { f: "Quality certification", c: "—", a: "—", p: "Three-pass mandatory", h: true },
+  { f: "You retain IP", c: "Yes", a: "Unclear", p: "Always — no co-author claim", h: false },
+  { f: "Success-aligned pricing", c: "—", a: "—", p: "3% only if funded", h: true },
+];

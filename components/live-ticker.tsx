@@ -3,33 +3,38 @@
 import { motion } from "motion/react";
 
 const ITEMS = [
-  { label: "Grants peer-reviewed", value: "342" },
-  { label: "in NIH awards", value: "$7.2M+" },
-  { label: "Avg. impact-score lift", value: "+12 pts" },
-  { label: "Active submissions", value: "63" },
-  { label: "Citation hallucinations caught", value: "1,847" },
-  { label: "Refund if not worth submitting", value: "30 days" },
+  ["342", "grants peer-reviewed"],
+  ["$7.2M+", "in NIH awards"],
+  ["+12 pts", "average impact-score lift"],
+  ["63", "active submissions this cycle"],
+  ["1,847", "citation hallucinations caught"],
+  ["30 days", "refund if not worth submitting"],
 ];
 
 export function LiveTicker() {
   return (
-    <div className="overflow-hidden border-b border-border/40 bg-muted/30 py-3">
-      <motion.div
-        className="flex shrink-0 gap-12 whitespace-nowrap text-xs text-muted-foreground sm:text-sm"
+    <div className="border-y border-[var(--ink)] overflow-hidden bg-[var(--paper)]">
+      <motion.ul
+        className="flex shrink-0 gap-12 whitespace-nowrap py-3"
         animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
       >
-        {[...ITEMS, ...ITEMS].map((it, i) => (
-          <span key={i} className="inline-flex items-center gap-2">
+        {[...ITEMS, ...ITEMS, ...ITEMS].map(([fig, label], i) => (
+          <li key={i} className="inline-flex items-baseline gap-3">
             <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-teal-400"
+              className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--oxblood)]"
               aria-hidden
             />
-            <span className="font-semibold text-foreground">{it.value}</span>
-            <span>{it.label}</span>
-          </span>
+            <span className="font-display text-[1.05rem] tabular-nums text-[var(--ink)]">
+              {fig}
+            </span>
+            <span className="font-mono text-[0.74rem] uppercase tracking-[0.16em] text-[var(--ink-muted)]">
+              {label}
+            </span>
+            <span className="text-[var(--ink-faint)] mx-3">·</span>
+          </li>
         ))}
-      </motion.div>
+      </motion.ul>
     </div>
   );
 }

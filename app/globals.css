@@ -4,25 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ── PayLineHQ — editorial scientific publication ──────────────────────────
+   Aesthetic: NEJM × Stripe Press × Substack premium publication
+   Light mode, paper background, ink text, oxblood accent, serif display.
+*/
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+
+  --font-sans: var(--font-newsreader);
+  --font-display: var(--font-newsreader);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-heading: var(--font-newsreader);
+
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -39,92 +34,194 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-paper: var(--paper);
+  --color-paper-warm: var(--paper-warm);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-rule: var(--ink-rule);
+  --color-oxblood: var(--oxblood);
+  --color-oxblood-tint: var(--oxblood-tint);
+  --color-marigold: var(--marigold);
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* Paper + ink palette */
+  --paper: #f5f1e8;          /* warm off-white, slightly creamier than #f8f6f0 */
+  --paper-warm: #ede6d4;     /* deeper paper for inset blocks */
+  --ink: #1a1612;            /* near-black with warmth */
+  --ink-muted: #4a4540;      /* secondary text */
+  --ink-faint: #8a847a;      /* tertiary, captions */
+  --ink-rule: #d4cdb8;       /* hairline rules */
+  --oxblood: #6b1d1d;        /* primary editorial accent */
+  --oxblood-tint: #f3e6e3;   /* oxblood at 8% on paper */
+  --marigold: #b8821f;       /* secondary accent for emphasis */
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* shadcn vars mapped onto editorial palette */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-warm);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-warm);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--oxblood-tint);
+  --accent-foreground: var(--oxblood);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: var(--ink-rule);
+  --input: var(--ink-rule);
+  --ring: var(--ink-muted);
+  --radius: 3px;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+    font-feature-settings: "ss01" 1, "ss02" 1, "kern" 1, "liga" 1, "onum" 1;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Subtle paper grain via SVG noise */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
   html {
-    @apply font-sans;
+    font-family: var(--font-newsreader), Georgia, serif;
   }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-newsreader), Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .font-mono {
+    font-family: var(--font-jetbrains-mono), "SF Mono", Menlo, monospace;
+    font-feature-settings: "ss02" 1, "ss03" 1, "ss04" 1, "calt" 0;
+  }
+
+  /* Small caps utility for credibility cues, eyebrows, mastheads */
+  .smallcaps {
+    font-family: var(--font-jetbrains-mono), "SF Mono", monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+  }
+
+  /* Drop cap for editorial paragraph openers */
+  .dropcap::first-letter {
+    font-family: var(--font-newsreader), Georgia, serif;
+    font-weight: 700;
+    font-size: 4.5em;
+    line-height: 0.8;
+    float: left;
+    margin: 0.08em 0.08em 0 0;
+    color: var(--oxblood);
+    font-feature-settings: "ss01" 1;
+  }
+
+  /* Single hairline rule, journal-style */
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--ink-rule);
+    margin: 0;
+  }
+
+  .rule-double {
+    border: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    height: 4px;
+  }
+
+  /* Section number eyebrow */
+  .section-number {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+
+  /* Editorial card with subtle paper-warm fill */
+  .editorial-card {
+    background: var(--paper-warm);
+    border: 1px solid var(--ink-rule);
+  }
+
+  /* Marginalia text — small, italic, set off in margin on wide screens */
+  .marginalia {
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  /* Underline animation for editorial links */
+  .editorial-link {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.35s ease;
+  }
+  .editorial-link:hover {
+    background-size: 100% 2px;
+  }
+
+  /* Hair-thin score gauge, like a journal abstract */
+  .score-rule {
+    height: 2px;
+    background: linear-gradient(90deg, var(--oxblood) 0%, var(--oxblood) var(--score-pct, 0%), var(--ink-rule) var(--score-pct, 0%), var(--ink-rule) 100%);
+  }
+
+  /* Reveal on intersection — used by Reveal component */
+  @keyframes editorialReveal {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Selection */
+::selection {
+  background: var(--ink);
+  color: var(--paper);
 }

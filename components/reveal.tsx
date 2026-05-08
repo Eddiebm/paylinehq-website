@@ -3,6 +3,10 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ReactNode } from "react";
 
+/**
+ * Editorial reveal — gentle 6px translation + opacity, no scale, no parallax.
+ * Earned motion: only the first time a section enters view, never on hover or scroll-back.
+ */
 export function Reveal({
   children,
   delay = 0,
@@ -13,14 +17,12 @@ export function Reveal({
   className?: string;
 }) {
   const reduce = useReducedMotion();
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
+  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-15% 0px" }}
       transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >

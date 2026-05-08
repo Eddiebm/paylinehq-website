@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
 
 export function NewsletterInline() {
   const [submitted, setSubmitted] = useState(false);
@@ -10,9 +8,8 @@ export function NewsletterInline() {
 
   if (submitted) {
     return (
-      <p className="mt-3 inline-flex items-center gap-2 text-sm text-teal-300">
-        <Check className="h-4 w-4" />
-        Subscribed. The next Payline is on its way.
+      <p className="font-display text-[1.05rem] text-[var(--ink)] italic">
+        — Subscribed. The next issue of <em>The Payline</em> is on its way.
       </p>
     );
   }
@@ -24,21 +21,32 @@ export function NewsletterInline() {
         if (!email) return;
         setSubmitted(true);
       }}
-      className="mt-3 flex flex-col gap-2 sm:flex-row"
       aria-label="Subscribe to The Payline"
+      className="w-full"
     >
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.edu"
-        aria-label="Email address"
-        className="flex-1 rounded-md border border-border/50 bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-teal-500 focus:outline-none"
-      />
-      <Button type="submit" size="sm" className="bg-teal-500 text-white hover:bg-teal-400">
-        Subscribe
-      </Button>
+      <label className="smallcaps text-[var(--ink-faint)] block mb-2">
+        Subscribe — no charge
+      </label>
+      <div className="flex flex-col sm:flex-row items-stretch border-2 border-[var(--ink)] bg-[var(--paper)]">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.edu"
+          aria-label="Email address"
+          className="flex-1 px-4 py-3 font-mono text-[0.92rem] text-[var(--ink)] bg-transparent placeholder:text-[var(--ink-faint)]/60 focus:outline-none"
+        />
+        <button
+          type="submit"
+          className="font-mono text-[0.78rem] uppercase tracking-[0.16em] bg-[var(--ink)] text-[var(--paper)] px-7 py-3 hover:bg-[var(--oxblood)] transition-colors"
+        >
+          Subscribe →
+        </button>
+      </div>
+      <p className="marginalia mt-2">
+        Biweekly. We unsubscribe with one click — no clawing back.
+      </p>
     </form>
   );
 }

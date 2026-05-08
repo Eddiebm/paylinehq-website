@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 const SITE = "https://paylinehq-website.vercel.app";
 const TITLE = "PayLineHQ — Stop your NIH grant from getting triaged";
 const DESCRIPTION =
-  "PayLineHQ peer-reviews your NIH application before NIH does — three reviewer simulations, three-pass quality check, citation verification, competitive impact scoring. Or we write the whole thing for you.";
+  "Three reviewer simulations, three-pass quality review, and competitive impact scoring — before NIH does it. Built by a biotech founder for biotech founders.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -68,11 +73,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${newsreader.variable} ${jetbrainsMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

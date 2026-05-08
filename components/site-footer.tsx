@@ -5,59 +5,83 @@ const APP_URL = "https://frankgrant.pages.dev";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/40 bg-muted/20">
-      <div className="container mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-10 md:grid-cols-5">
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
-              <span
-                className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-teal-500 text-sm font-bold text-white"
-                aria-hidden
-              >
-                P
-              </span>
-              PayLineHQ
-            </Link>
-            <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              NIH grant peer-review, simulated. Built by a biotech founder for biotech founders.
+    <footer className="border-t-2 border-[var(--ink)] bg-[var(--paper-warm)] relative z-[2]">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12 py-14 lg:py-20">
+        {/* Editorial newsletter offer — top of footer */}
+        <div className="grid grid-cols-12 gap-6 lg:gap-12 pb-14 border-b border-[var(--ink-rule)]">
+          <div className="col-span-12 md:col-span-5">
+            <p className="smallcaps text-[var(--oxblood)] mb-3">⌜ The Payline ⌝</p>
+            <h3 className="font-display text-[2rem] leading-[1.05] tracking-[-0.02em] mb-4">
+              Biweekly NIH grant intel.
+              <br />
+              <em className="italic">Practical, not promotional.</em>
+            </h3>
+            <p className="marginalia max-w-md">
+              Reviewer psychology, what gets triaged, what gets funded, and the templates we use
+              on Submit-Ready engagements. Free.
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-7 md:pl-12 md:border-l md:border-[var(--ink-rule)] flex items-center">
+            <div className="w-full">
+              <NewsletterInline />
+            </div>
+          </div>
+        </div>
+
+        {/* Colophon-style links */}
+        <div className="grid grid-cols-12 gap-6 lg:gap-12 pt-14">
+          <div className="col-span-12 md:col-span-4">
+            <p className="font-display text-[1.6rem] tracking-[-0.02em] mb-2">PayLineHQ</p>
+            <p className="marginalia max-w-xs">
+              A peer-review engine for NIH grant applications. Built by a biotech founder for
+              biotech founders. Published by COARE Holdings, Saint Louis &amp; Accra.
             </p>
           </div>
 
-          <FooterCol title="Product">
-            <FooterLink href="/#how-it-works">How it works</FooterLink>
-            <FooterLink href="/pricing">Pricing</FooterLink>
-            <FooterLink href={APP_URL} target="_blank">App</FooterLink>
+          <FooterCol title="The product">
+            <FooterLink href="/">Cover story</FooterLink>
+            <FooterLink href="/pricing">Subscriptions</FooterLink>
+            <FooterLink href={APP_URL} target="_blank">
+              Open the app
+            </FooterLink>
             <FooterLink href="/faq">FAQ</FooterLink>
           </FooterCol>
 
-          <FooterCol title="Services">
-            <FooterLink href="/hire">Done For You</FooterLink>
-            <FooterLink href="/pricing">Phase I / II</FooterLink>
+          <FooterCol title="Engagements">
+            <FooterLink href="/hire">Submit-Ready (DFY)</FooterLink>
+            <FooterLink href="/pricing">Phase I / Phase II</FooterLink>
             <FooterLink href="/pricing">R01 / R21</FooterLink>
-            <FooterLink href="/hire">Book a consult</FooterLink>
+            <FooterLink href="/hire">Commission</FooterLink>
           </FooterCol>
 
-          <FooterCol title="The Payline">
-            <p className="text-sm text-muted-foreground">
-              Biweekly NIH grant intel. The Payline is our newsletter — practical, not promotional.
-            </p>
-            <NewsletterInline />
+          <FooterCol title="Reading">
+            <FooterLink href="/newsletter">The Payline</FooterLink>
+            <FooterLink href="/blog">Field notes</FooterLink>
+            <FooterLink href="/faq">Editorial FAQ</FooterLink>
           </FooterCol>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/30 pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} PayLineHQ · COARE Holdings LLC</p>
-          <div className="flex gap-5">
-            <Link href="https://linkedin.com/company/paylinehq" target="_blank" className="hover:text-foreground">
+        {/* Final masthead-style colophon */}
+        <div className="mt-14 pt-7 border-t border-[var(--ink-rule)] flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+          <p className="smallcaps text-[var(--ink-faint)]">
+            © {new Date().getFullYear()} · COARE Holdings LLC · Set in Newsreader &amp; JetBrains
+            Mono · Saint Louis &amp; Accra
+          </p>
+          <div className="flex items-baseline gap-5">
+            <Link
+              href="https://linkedin.com/company/paylinehq"
+              target="_blank"
+              className="smallcaps editorial-link"
+            >
               LinkedIn
             </Link>
-            <Link href="/newsletter" className="hover:text-foreground">
+            <Link href="/newsletter" className="smallcaps editorial-link">
               Newsletter
             </Link>
-            <Link href="#" className="hover:text-foreground">
+            <Link href="#" className="smallcaps editorial-link">
               Terms
             </Link>
-            <Link href="#" className="hover:text-foreground">
+            <Link href="#" className="smallcaps editorial-link">
               Privacy
             </Link>
           </div>
@@ -67,11 +91,17 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
+function FooterCol({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div>
-      <h4 className="mb-3 text-sm font-semibold">{title}</h4>
-      <ul className="space-y-2">
+    <div className="col-span-6 md:col-span-2 lg:col-span-2">
+      <p className="smallcaps text-[var(--ink-faint)] mb-4">{title}</p>
+      <ul className="space-y-2.5">
         {Array.isArray(children) ? (
           children.map((c, i) => <li key={i}>{c}</li>)
         ) : (
@@ -84,19 +114,19 @@ function FooterCol({ title, children }: { title: string; children: React.ReactNo
 
 function FooterLink({
   href,
-  children,
   target,
+  children,
 }: {
   href: string;
-  children: React.ReactNode;
   target?: string;
+  children: React.ReactNode;
 }) {
   return (
     <Link
       href={href}
       target={target}
       rel={target ? "noopener" : undefined}
-      className="text-sm text-muted-foreground hover:text-foreground"
+      className="font-display text-[0.98rem] text-[var(--ink)] editorial-link"
     >
       {children}
     </Link>

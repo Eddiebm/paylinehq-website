@@ -2,94 +2,102 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { LinkButton } from "@/components/link-button";
 
 const APP_URL = "https://frankgrant.pages.dev";
 
 const NAV_LINKS = [
-  { href: "/#how-it-works", label: "How it works" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/hire", label: "Book" },
-  { href: "/newsletter", label: "Newsletter" },
-  { href: "/blog", label: "Blog" },
+  { href: "/pricing", label: "Subscriptions" },
+  { href: "/hire", label: "Commission" },
+  { href: "/newsletter", label: "The Payline" },
+  { href: "/blog", label: "Field notes" },
   { href: "/faq", label: "FAQ" },
 ];
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight"
-          aria-label="PayLineHQ home"
-        >
-          <span
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-teal-500 text-sm font-bold text-white"
-            aria-hidden
+    <header className="relative z-[3] border-b border-[var(--ink)]">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        <div className="flex h-14 items-baseline justify-between gap-6">
+          {/* Wordmark — editorial masthead */}
+          <Link
+            href="/"
+            className="flex items-baseline gap-2.5 self-center"
+            aria-label="PayLineHQ home"
           >
-            P
-          </span>
-          <span>PayLineHQ</span>
-        </Link>
+            <span className="font-display text-[1.55rem] tracking-[-0.02em] leading-none">
+              PayLineHQ
+            </span>
+            <span className="hidden sm:inline smallcaps text-[var(--ink-faint)] pl-2.5 border-l border-[var(--ink-rule)]">
+              Peer-Review Engine
+            </span>
+          </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
-          {NAV_LINKS.map((l) => (
+          {/* Right — links + primary action */}
+          <nav
+            aria-label="Primary"
+            className="hidden md:flex items-baseline gap-7 self-center"
+          >
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[var(--ink-muted)] hover:text-[var(--oxblood)] transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
             <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              href={APP_URL}
+              target="_blank"
+              rel="noopener"
+              className="font-mono text-[0.72rem] uppercase tracking-[0.16em] bg-[var(--ink)] text-[var(--paper)] px-4 py-2.5 hover:bg-[var(--oxblood)] transition-colors"
             >
-              {l.label}
+              Open the app →
             </Link>
-          ))}
-        </nav>
+          </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <LinkButton href={APP_URL} target="_blank" rel="noopener" variant="ghost"
-            size="sm"
-            className="text-foreground/80 hover:text-foreground">
-              App
-            </LinkButton>
-          <LinkButton href="/hire" size="sm" className="bg-teal-500 text-white hover:bg-teal-400">Hire us</LinkButton>
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            className="md:hidden self-center font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[var(--ink)] border border-[var(--ink-rule)] px-3 py-2"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/40 md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
       </div>
 
       {open && (
-        <div className="border-t border-border/40 md:hidden">
-          <nav aria-label="Mobile" className="container mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
+        <nav
+          aria-label="Mobile"
+          className="md:hidden border-t border-[var(--ink-rule)] bg-[var(--paper-warm)]"
+        >
+          <div className="mx-auto max-w-[1280px] px-6 py-5 flex flex-col gap-4">
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                className="font-mono text-[0.78rem] uppercase tracking-[0.16em] text-[var(--ink)] py-1"
               >
                 {l.label}
               </Link>
             ))}
-            <div className="mt-2 flex gap-2">
-              <LinkButton href={APP_URL} target="_blank" rel="noopener" variant="outline" size="sm" className="flex-1" onClick={() => setOpen(false)}>
-                App
-              </LinkButton>
-              <LinkButton href="/hire" size="sm" className="flex-1 bg-teal-500 text-white hover:bg-teal-400" onClick={() => setOpen(false)}>
-                Hire us
-              </LinkButton>
-            </div>
-          </nav>
-        </div>
+            <Link
+              href={APP_URL}
+              target="_blank"
+              rel="noopener"
+              onClick={() => setOpen(false)}
+              className="mt-2 font-mono text-[0.78rem] uppercase tracking-[0.16em] bg-[var(--ink)] text-[var(--paper)] px-4 py-3 text-center"
+            >
+              Open the app →
+            </Link>
+          </div>
+        </nav>
       )}
     </header>
   );
